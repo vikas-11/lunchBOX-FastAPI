@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="lunchBOX order management" />
+  <title>Orders · lunchBOX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">LB</div>
+        <div><strong>lunchBOX</strong><span>Delivery Console</span></div>
+      </div>
+      <nav>
+        <a class="nav-item" href="/">Dashboard</a>
+        <a class="nav-item active" href="/orders-page">Orders</a>
+        <a class="nav-item" href="/docs" target="_blank">API Docs ↗</a>
+      </nav>
+      <div class="sidebar-card">
+        <span class="live-dot"></span>
+        <div><strong>Orders workspace</strong><small>Manage live deliveries</small></div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">ORDER MANAGEMENT</p>
+          <h1 id="pageTitle">Orders</h1>
+          <p id="pageSubtitle" class="muted">Only delivery orders are shown on this page.</p>
+        </div>
+        <div class="topbar-actions">
+          <a class="ghost-btn button-link" href="/">← Dashboard</a>
+          <button id="openCreate" class="primary-btn">+ New order</button>
+        </div>
+      </header>
+
+      <section class="panel orders-page-panel">
+        <div id="listControls" class="panel-heading responsive-heading">
+          <div><p class="eyebrow">LIVE ORDERS</p><h2>Delivery queue</h2></div>
+          <div class="filters">
+            <input id="searchInput" type="search" placeholder="Search orders…" />
+            <select id="statusFilter">
+              <option value="">All statuses</option>
+              <option value="preparing">Preparing</option>
+              <option value="picked_up">Picked up</option>
+              <option value="in_transit">In transit</option>
+              <option value="delivered">Delivered</option>
+            </select>
+            <button id="refreshBtn" class="ghost-btn">Refresh</button>
+          </div>
+        </div>
+
+        <div id="message" class="message" hidden></div>
+        <div id="ordersContainer" class="orders-list">
+          <div class="empty-state">Loading orders…</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="createDialog">
+    <form id="createForm">
+      <div class="modal-head">
+        <div><p class="eyebrow">NEW DELIVERY</p><h2>Create order</h2></div>
+        <button type="button" id="closeCreate" class="icon-btn">×</button>
+      </div>
+      <label>Customer name<input name="customer_name" required minlength="2" placeholder="e.g. Vikas Yadav" /></label>
+      <label>Delivery address<textarea name="delivery_address" required minlength="5" rows="3" placeholder="Full delivery address"></textarea></label>
+      <label>Items<textarea name="items" required minlength="2" rows="3" placeholder="e.g. 2 × Paneer thali, 1 × Dal combo"></textarea></label>
+      <div class="modal-actions"><button type="button" id="cancelCreate" class="ghost-btn">Cancel</button><button class="primary-btn" type="submit">Create order</button></div>
+    </form>
+  </dialog>
+
+  <script src="/static/orders.js"></script>
+</body>
+</html>

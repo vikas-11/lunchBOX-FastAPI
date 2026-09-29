@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="lunchBOX smart tiffin delivery dashboard" />
+  <title>lunchBOX · Smart Tiffin Delivery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">LB</div>
+        <div><strong>lunchBOX</strong><span>Delivery Console</span></div>
+      </div>
+      <nav>
+        <a class="nav-item active" href="/">Dashboard</a>
+        <a class="nav-item" href="/orders-page">Orders</a>
+        <a class="nav-item" href="/docs" target="_blank">API Docs ↗</a>
+      </nav>
+      <div class="sidebar-card">
+        <span class="live-dot"></span>
+        <div><strong>API Online</strong><small>FastAPI + SQLModel</small></div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">SMART TIFFIN OPERATIONS</p>
+          <h1>Delivery dashboard</h1>
+          <p class="muted">Create, track and complete lunch deliveries from one clean workspace.</p>
+        </div>
+        <button id="openCreate" class="primary-btn">+ New order</button>
+      </header>
+
+      <section id="dashboard" class="stats-grid">
+        <a class="stat-card stat-link" href="/orders-page"><span>Total orders</span><strong id="totalOrders">—</strong><small>View all orders →</small></a>
+        <a class="stat-card stat-link" href="/orders-page"><span>Active</span><strong id="activeOrders">—</strong><small>Needs attention</small></a>
+        <a class="stat-card stat-link" href="/orders-page?status=delivered"><span>Delivered</span><strong id="deliveredOrders">—</strong><small>Completed orders</small></a>
+        <a class="stat-card stat-link" href="/orders-page"><span>Today</span><strong id="todayOrders">—</strong><small>Created today</small></a>
+      </section>
+
+      <section class="panel progress-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">PIPELINE</p><h2>Order flow</h2></div>
+          <span id="lastUpdated" class="muted">Updating…</span>
+        </div>
+        <div class="pipeline" id="pipeline"></div>
+      </section>
+
+      <section class="panel dashboard-orders-cta">
+        <div>
+          <p class="eyebrow">ORDERS</p>
+          <h2>Manage deliveries on a dedicated page</h2>
+          <p class="muted">Open the Orders workspace to search, filter, update status, inspect history, or delete an order.</p>
+        </div>
+        <a class="primary-btn button-link" href="/orders-page">Open orders →</a>
+      </section>
+
+      <div id="message" class="message floating-message" hidden></div>
+    </main>
+  </div>
+
+  <dialog id="createDialog">
+    <form id="createForm">
+      <div class="modal-head">
+        <div><p class="eyebrow">NEW DELIVERY</p><h2>Create order</h2></div>
+        <button type="button" id="closeCreate" class="icon-btn">×</button>
+      </div>
+      <label>Customer name<input name="customer_name" required minlength="2" placeholder="e.g. Vikas Yadav" /></label>
+      <label>Delivery address<textarea name="delivery_address" required minlength="5" rows="3" placeholder="Full delivery address"></textarea></label>
+      <label>Items<textarea name="items" required minlength="2" rows="3" placeholder="e.g. 2 × Paneer thali, 1 × Dal combo"></textarea></label>
+      <div class="modal-actions"><button type="button" id="cancelCreate" class="ghost-btn">Cancel</button><button class="primary-btn" type="submit">Create order</button></div>
+    </form>
+  </dialog>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
